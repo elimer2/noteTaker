@@ -15,9 +15,7 @@ function readDB() {
   return parsedNotes;
 }
 
-function writeDB(newNote) {
-  const notes = readDB();
-  notes.push(newNote);
+function writeDB(notes) {
   fs.writeFile(
     __dirname + "/db/db.json",
     JSON.stringify(notes, null, "\t"),
@@ -42,11 +40,37 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   newNote.id = uuidv4();
-  writeDB(newNote);
+
+  const notes = readDB();
+  notes.push(newNote);
+
+  writeDB(notes);
   res.json({
     status: "Success",
     message: "Note Saved",
   });
+});
+
+app.delete("/api/notes/:id", (req, res) => {
+  const id = req.params.id;
+  const notes = readDB();
+  const noteToDeleteIndex = notes.findIndex((element) => {
+    return element.id === id;
+  });
+
+  if (noteToDeleteIndex >= 0) {
+    notes.splice(noteToDeleteIndex, 1);
+    writeDB(notes);
+    res.json({
+      status: "Success",
+      message: "Note successfully deleted",
+    });
+  } else {
+    res.json({
+      status: "Error",
+      message: "Id not found",
+    });
+  }
 });
 
 //Listener
