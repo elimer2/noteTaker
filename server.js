@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/static', express.static(__dirname + '/public'));
 
 function readDB() {
   const notes = fs.readFileSync(__dirname + "/db/db.json");
