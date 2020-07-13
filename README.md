@@ -1,9 +1,10 @@
 # noteTaker
+
 Note taking app
 
 ## Description
 
-Project consists of a Javascript run random password generator.
+Project consists of a note taking application.
 
 ## Technology Used
 
@@ -11,5 +12,7 @@ Project consists of a Javascript run random password generator.
 - CSS3
 - BOOTSTRAP
 - JAVASCRIPT
+- node.js
+- HEROKU
 
-#Screenshot \*![alt text](./img.png "screenshot")
+#Screenshot \*![alt text](./img/1.png "screenshot") \*![alt text](./img/2.png "screenshot") \*![alt text](./img/3.png "screenshot")
