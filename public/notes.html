@@ -73,11 +73,24 @@
               var newNoteItem = $("<li>");
               newNoteItem.addClass("list-group-item");
               newNoteItem.html(`
+                <i class="fa fa-window-close delete-note" data-id=${data[i].id}></i>
                 <h4>${data[i].title}</h4>
                 <div>${data[i].text}</div>
-            `);
+              `);
               $(".list-group").prepend(newNoteItem);
             }
+
+            $(".delete-note").on("click", function (event) {
+              const idToDelete = $(this).attr("data-id");
+              $.ajax({
+                url: `/api/notes/${idToDelete}`,
+                type: "DELETE",
+                success: function (response) {
+                  alert(response.message);
+                  getNotes();
+                },
+              });
+            });
           },
           "json"
         );
